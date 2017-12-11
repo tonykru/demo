@@ -1,3 +1,11 @@
 https://en.wikipedia.org/wiki/Java_virtual_machine (JVM)
 https://en.wikipedia.org/wiki/Representational_state_transfer (RESTful)
 https://en.wikipedia.org/wiki/Java_Database_Connectivity (JDBC)
+
+########_ClassLoader_###########
+Loading: Finds and load binary imports type.
+Linking: 
+	Verification: verify type imported.
+	Preparation: allocates memory for class variables
+Initialization:	 invokes Java code that initializes class variables
+################################
