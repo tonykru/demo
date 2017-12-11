@@ -9,3 +9,7 @@ Linking:
 	Preparation: allocates memory for class variables
 Initialization:	 invokes Java code that initializes class variables
 ################################
+
+Software architecture Design
+https://www.udacity.com/course/software-architecture-design--ud821
+https://en.wikipedia.org/wiki/Software_architecture
