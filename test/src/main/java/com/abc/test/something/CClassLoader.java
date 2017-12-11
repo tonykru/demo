@@ -13,8 +13,7 @@ public class CClassLoader extends ClassLoader {
 	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) throws Exception {
 		Class<BubbleSort> bb1 = BubbleSort.class;
-		Class<BubbleSort> bb2 = (Class<BubbleSort>) new CClassLoader()
-				.loadClass("com.abc.test.util.sort.BubbleSort");
+		Class<BubbleSort> bb2 = (Class<BubbleSort>) new CClassLoader().findClass("com.abc.test.util.sort.BubbleSort");
 		System.out.println(bb2);
 		System.out.println(bb1 == bb2);
 
@@ -24,20 +23,35 @@ public class CClassLoader extends ClassLoader {
 		System.out.println(Arrays.toString(src));
 	}
 
+	public Class<?> findClass(String name) {
+
+		System.out.println(name);
+		try {
+			String cName = name.replace(".", "/") + ".class.show";
+			cName = cName.replace("util/sort", "something");
+			byte[] b = loadClassData(cName);
+			return defineClass(name, b, 0, b.length);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/*
 	@SuppressWarnings({ "static-access", "restriction" })
 	public CClassLoader() {
 		super(com.sun.nio.zipfs.ZipPath.class.getClassLoader().getSystemClassLoader());
 	}
-
+	
 	public Class<?> loadClass(String name) {
 
 		try {
 			if (name.startsWith("java")) {
-				return super.loadClass(name);
+				return super.	(name);
 			}
 			String cName = name.replace(".", "/") + ".class.show";
 			cName = cName.replace("util/sort", "something");
-			byte[] b = loadClassFileData(cName);
+			byte[] b = loadClassData(cName);
 			Class<?> c = defineClass(name, b, 0, b.length);
 			resolveClass(c);
 			return c;
@@ -45,9 +59,9 @@ public class CClassLoader extends ClassLoader {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
 
-	private byte[] loadClassFileData(String name) throws IOException {
+	private byte[] loadClassData(String name) throws IOException {
 		InputStream stream = getClass().getClassLoader().getResourceAsStream(name);
 		getClass().getClassLoader().getResourceAsStream("");
 		int size = stream.available();
